@@ -1,0 +1,20 @@
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 2.5rem;
+  max-width: 250px;
+  border-radius: 30px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+}
+
+.button-container:hover {
+  border: thin solid var(--secondary-color);
+  box-shadow: 0px 0.5px 2px 0.5px var(--secondary-color);
+  -webkit-box-shadow: 0px 0.5px 4px 0.5px var(--secondary-color);
+  -moz-box-shadow: 0px 0.5px 2px 0.5px var(--secondary-color);
+}
