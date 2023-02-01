@@ -1,0 +1,10 @@
+.btn-g {
+  height: inherit;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  background-color: var(--secondary-detail-color);
+}
