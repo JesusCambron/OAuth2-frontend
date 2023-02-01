@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import SessionContext from '../../context/SessionContext';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { decodeToken } from 'react-jwt';
 
 export const TYPES = {
   login: { text: "Login with Google", url: `${VITE_BACK_URL}/api/account/login/google` },
@@ -19,7 +20,16 @@ const GoogleButton = ({ type }) => {
       console.log(type.url)
       axios.post(type.url, {
         access_token: codeResponse.access_token
-      }).then(response => handleSession(response))
+      }).then(response => {
+        const decodedToken = decodeToken(response.data.data);
+        const session = {
+          first_name: decodedToken.first_name,
+          last_name: decodedToken.last_name,
+          email: decodedToken.email,
+          token: token,
+        }
+        handleSession(session);
+      })
         .catch(err => console.log(err))
     },
     onError: errorResponse => console.log(errorResponse)

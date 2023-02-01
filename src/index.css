@@ -26,6 +26,11 @@ body {
   color: var(--text-color);
 }
 
+a {
+  text-decoration: none;
+  color: var(--secondary-detail-color);
+}
+
 a:hover {
   opacity: 0.75;
 }
