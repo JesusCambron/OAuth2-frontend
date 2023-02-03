@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
 import Button from '../components/Button/Button'
 import SessionContext from '../context/SessionContext';
-import GoogleButton, { TYPES } from '../components/GoogleButton/GoogleButton';
+import GoogleButton, { GOOGLE_TYPES } from '../components/GoogleButton/GoogleButton';
+import Card from '../components/Card/Card';
 import { VITE_BACK_URL } from '../config';
+import { FiLock, FiMail } from "react-icons/fi";
 import axios from 'axios';
 import { decodeToken } from "react-jwt";
-import { FiUser, FiLock } from "react-icons/fi";
-import './login.css'
+import { Link } from 'react-router-dom';
 
 const initialCredentials = {
   email: "",
@@ -39,14 +40,14 @@ const Login = () => {
   }
 
   return (
-    <section>
+    <>
       <h1 className="title">Oauth Project</h1>
-      <div className="oauth-container">
+      <Card>
         <h2>Login</h2>
         <div className="form-container">
           <form action="POST">
             <div className="input-container">
-              <FiUser size={20} className="icon-input" />
+              <FiMail size={20} className="icon-input" />
               <input type="email" name="email" id="email" placeholder=" " className="form-input" value={credentials.email} onChange={e => onChange(e)} />
               <label htmlFor="email" className="form-label">Email</label>
             </div>
@@ -67,13 +68,13 @@ const Login = () => {
           <p className="or-login">OR</p>
         </div>
         <div className="oauth-login-container">
-          <GoogleButton type={TYPES.login} />
+          <GoogleButton type={GOOGLE_TYPES.login} />
         </div>
         <div className="signup-container">
-          <a href="">Sign Up</a>
+          <Link to={"/oauth/signup"}>Sign Up</Link>
         </div>
-      </div>
-    </section>
+      </Card>
+    </>
   )
 }
 

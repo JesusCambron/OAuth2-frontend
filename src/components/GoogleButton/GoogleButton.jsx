@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import "./google-button.css"
 import { VITE_BACK_URL } from '../../config';
 import { FcGoogle } from "react-icons/fc";
 import SessionContext from '../../context/SessionContext';
@@ -7,9 +6,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { decodeToken } from 'react-jwt';
 
-export const TYPES = {
+export const GOOGLE_TYPES = {
   login: { text: "Login with Google", url: `${VITE_BACK_URL}/api/account/login/google` },
-  signup: { text: "Signup", url: `${VITE_BACK_URL}/api/account/signup/google` },
+  signup: { text: "Signup with Google", url: `${VITE_BACK_URL}/api/account/signup/google` },
 }
 
 const GoogleButton = ({ type }) => {
