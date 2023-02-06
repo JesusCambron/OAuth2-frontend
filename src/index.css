@@ -132,9 +132,10 @@ p {
 /* Oauth Page */
 
 .oauth-section {
-  height: 100vh;
-  background-color: var(--primary-color);
+  min-height: 100vh;
+  min-width: 330px;
   padding: 1.5rem 2.3rem;
+  background-color: var(--primary-color);
 }
 
 .title {

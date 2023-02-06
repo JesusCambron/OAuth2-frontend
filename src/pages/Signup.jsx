@@ -1,9 +1,12 @@
+import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { FiLock, FiMail, FiUser, FiEye, FiEyeOff } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button/Button'
 import Card from '../components/Card/Card'
 import GoogleButton, { GOOGLE_TYPES } from '../components/GoogleButton/GoogleButton'
+import LoaderPage from '../components/Loader/LoaderPage'
+import { VITE_BACK_URL } from '../config'
 import { isCorrectLength, isEmail, isEmptyString, isValidateName, isValidatePassword } from '../utils/Validators'
 
 const initialAccount = {
@@ -27,6 +30,7 @@ const Signup = () => {
   const [lastChange, setLastChange] = useState({});
   const [isTextPassword, setIsTextPassword] = useState(false);
   const [isTextPasswordConfirm, setIsTextPasswordConfirm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (Object.entries(account).length) {
@@ -49,12 +53,21 @@ const Signup = () => {
 
   const onClick = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     validateForm(account);
-    /* await axios.post(`${VITE_BACK_URL}/api/account/signup/`, account)
+    await axios.post(`${VITE_BACK_URL}/api/account/signup/`, account)
       .then(response => {
-
+        /* Check Your Email page */
+        console.log(response);
       })
-      .catch(err => console.log(err)); */
+      .catch(err => {
+        if (err.response.status === 400) {
+          console.log("This email already in use")
+        } else if (err.response.status === 500) {
+          console.log("Internal server problem")
+        }
+      });
+    setIsLoading(false);
   }
 
   const validateForm = (fields) => {
@@ -159,21 +172,21 @@ const Signup = () => {
             </div>
             <div className="input-container">
               <FiLock size={20} className="icon-input" />
-              <input type={`${isTextPassword ? "password" : "text"}`} name="pw" id="pw" className={`form-input${errorsForm.pw.length ? " input-error" : ""}`} placeholder=" " value={account.pw || ""} onChange={e => onChange(e)} />
+              <input type={`${isTextPassword ? "text" : "password"}`} name="pw" id="pw" className={`form-input${errorsForm.pw.length ? " input-error" : ""}`} placeholder=" " value={account.pw || ""} onChange={e => onChange(e)} />
               <label htmlFor="pw" className="form-label">Password</label>
               {isTextPassword ?
-                <FiEye size={20} className="pw-eye" onClick={e => setIsTextPassword(!isTextPassword)} /> :
-                <FiEyeOff size={20} className="pw-eye" onClick={e => setIsTextPassword(!isTextPassword)} />
+                <FiEyeOff size={20} className="pw-eye" onClick={e => setIsTextPassword(!isTextPassword)} /> :
+                <FiEye size={20} className="pw-eye" onClick={e => setIsTextPassword(!isTextPassword)} />
               }
               {errorsForm?.pw && errorsForm?.pw.map(error => <small className="error-msg">{error}</small>)}
             </div>
             <div className="input-container">
               <FiLock size={20} className="icon-input" />
-              <input type={`${isTextPasswordConfirm ? "password" : "text"}`} name="pwConfirm" id="pwConfirm" className={`form-input${errorsForm.pwConfirm.length ? " input-error" : ""}`} placeholder=" " value={account.pwConfirm || ""} onChange={e => onChange(e)} />
+              <input type={`${isTextPasswordConfirm ? "text" : "password"}`} name="pwConfirm" id="pwConfirm" className={`form-input${errorsForm.pwConfirm.length ? " input-error" : ""}`} placeholder=" " value={account.pwConfirm || ""} onChange={e => onChange(e)} />
               <label htmlFor="pwConfirm" className="form-label">Password Confirm</label>
               {isTextPasswordConfirm ?
-                <FiEye size={20} className="pw-eye" onClick={e => setIsTextPasswordConfirm(!isTextPasswordConfirm)} /> :
-                <FiEyeOff size={20} className="pw-eye" onClick={e => setIsTextPasswordConfirm(!isTextPasswordConfirm)} />
+                <FiEyeOff size={20} className="pw-eye" onClick={e => setIsTextPasswordConfirm(!isTextPasswordConfirm)} /> :
+                <FiEye size={20} className="pw-eye" onClick={e => setIsTextPasswordConfirm(!isTextPasswordConfirm)} />
               }
               {errorsForm?.pwConfirm && errorsForm?.pwConfirm.map(error => <small className="error-msg">{error}</small>)}
             </div>
@@ -192,6 +205,7 @@ const Signup = () => {
           <Link to={"/oauth/login"}>Sign In</Link>
         </div>
       </Card>
+      {isLoading && <LoaderPage />}
     </>
   )
 }
