@@ -76,6 +76,49 @@ p {
 }
 
 /* ********** Components ********** */
+
+/* Google Button */
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 2.5rem;
+  max-width: 250px;
+  border-radius: 30px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+}
+
+.button-container:hover {
+  border: thin solid var(--secondary-color);
+  box-shadow: 0px 0.5px 2px 0.5px var(--secondary-color);
+  -webkit-box-shadow: 0px 0.5px 4px 0.5px var(--secondary-color);
+  -moz-box-shadow: 0px 0.5px 2px 0.5px var(--secondary-color);
+}
+
+/* Card */
+.card {
+  background-color: white;
+  text-align: center;
+  min-width: 206px;
+  max-width: 500px;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding: 2rem 4rem;
+  }
+}
+
+/* ********** Utilities ********** */
 .btn {
   cursor: pointer;
   transition: opacity 0.2s ease-in;
@@ -84,5 +127,135 @@ p {
 .btn:hover {
   opacity: 0.8;
 }
-/* ********** Utilities ********** */
 /* ********** Site Styles ********** */
+
+/* Oauth Page */
+
+.oauth-section {
+  min-height: 100vh;
+  min-width: 330px;
+  padding: 1.5rem 2.3rem;
+  background-color: var(--primary-color);
+}
+
+.title {
+  text-align: center;
+}
+
+.form-container {
+  margin-top: 1.5rem;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.icon-input {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}
+
+.pw-eye {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+.form-input {
+  height: 2.8rem;
+  width: 100%;
+  border: none;
+  padding: 10px 10px 0 40px;
+  border-bottom: thin solid var(--primary-detail-color);
+}
+
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover, 
+.form-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 40rem #fff inset;
+}
+
+.form-label {
+  background-color: white;
+  cursor: pointer;
+  position: absolute;
+  left: 40px;
+  transform: translateY(18px);
+  transition: transform 0.5s, color 0.3s;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  transform: translateY(-10px) translateX(-30px) scale(0.9);;
+  transform-origin: top left;
+}
+
+.form-input:focus-visible {
+  outline-color: var(--text-color);
+}
+
+.input-error + label {
+  color: red;
+}
+
+.input-error {
+  border: thin solid red;
+}
+
+.error-msg {
+  color: red;
+  display: block;
+  text-align: end;
+  margin-top: 0.5rem;
+}
+
+.forgot-password-container > a{
+  display: block;
+  text-align: end;
+}
+
+.form-button-container {
+  height: 2.4rem;
+  max-width: 10rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.or-container {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  color: gray;
+  margin-top: 1rem;
+}
+
+.or-container:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  min-width: 80%;
+  left: 10%;
+  border-bottom: 1px solid gray;
+}
+
+.or-login {
+  display: inline;
+  position: relative;
+  background-color: white;
+}
+
+.oauth-login-container {
+  margin-top: 1rem;
+}
+
+.signup-container{
+  margin-top: 5rem;
+}
+
+.signup-container > a{
+  display: block;
+  text-align: center;
+}
