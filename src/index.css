@@ -26,6 +26,10 @@ body {
   color: var(--text-color);
 }
 
+#root {
+  min-width: 280px;
+}
+
 a {
   text-decoration: none;
   color: var(--secondary-detail-color);
@@ -103,7 +107,7 @@ p {
 .card {
   background-color: white;
   text-align: center;
-  min-width: 206px;
+  min-width: 200px;
   max-width: 500px;
   margin-top: 1.5rem;
   margin-left: auto;
@@ -130,11 +134,14 @@ p {
 /* ********** Site Styles ********** */
 
 /* Oauth Page */
+.section {
+  padding: 1.5rem 3rem;
+}
 
 .oauth-section {
   min-height: 100vh;
-  min-width: 330px;
-  padding: 1.5rem 2.3rem;
+  min-width: min-content;
+  padding: 1.5rem 0.6rem;
   background-color: var(--primary-color);
 }
 
@@ -258,4 +265,26 @@ p {
 .signup-container > a{
   display: block;
   text-align: center;
+}
+
+/* Home */
+.home {
+  min-height: 100vh;
+  color: white;
+  background-color: var(--secondary-color);
+}
+
+.home-user-info {
+  margin-top: 2rem;
+}
+
+.logout-container {
+  height: 2rem;
+  max-width: 8rem;
+  margin: 2rem auto;
+  background-color: var(--text-color);
+}
+
+.logout-container > button{
+  width: 3rem;
 }
