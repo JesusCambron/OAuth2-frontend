@@ -6,5 +6,16 @@
   border-radius: 15px;
   outline: none;
   border: none;
+}
+
+.btn-primary{
   background-color: var(--secondary-detail-color);
+}
+
+.btn-cancel{
+  background-color: gray;
+}
+
+.btn-custom{
+  background-color: inherit;
 }

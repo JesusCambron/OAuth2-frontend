@@ -15,10 +15,11 @@ export const GOOGLE_TYPES = {
 }
 
 const GoogleButton = ({ type }) => {
-  const { handleSession } = useContext(SessionContext);
+  const { sessionLogin, setIsLoading } = useContext(SessionContext);
 
   const useGoogle = useGoogleLogin({
     onSuccess: codeResponse => {
+
       axios.post(type.url, {
         access_token: codeResponse.access_token
       }).then(response => {
@@ -31,7 +32,7 @@ const GoogleButton = ({ type }) => {
             email: decodedToken.email,
             token
           }
-          handleSession(session);
+          sessionLogin(session);
         } else {
           /* Check Your Email page */
           console.log(response);
@@ -42,8 +43,15 @@ const GoogleButton = ({ type }) => {
     onError: errorResponse => console.log(errorResponse)
   });
 
+  const onClick = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    useGoogle();
+  }
+
+
   return (
-    <div className="btn button-container" onClick={useGoogle}>
+    <div className="btn button-container" onClick={e => onClick(e)}>
       <FcGoogle size={30} />
       <p>{type.text}</p>
     </div>

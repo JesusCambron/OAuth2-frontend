@@ -6,13 +6,17 @@ const initialSession = null;
 
 const SessionProvider = ({ children }) => {
   const [session, setSession] = useState(initialSession);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSession = (newSession) => {
-    console.log(newSession);
-    setSession(newSession)
+  const sessionLogin = (newSession) => {
+    setSession(newSession);
   }
 
-  const data = { session, handleSession }
+  const sessionLogout = () => {
+    setSession(null);
+  }
+
+  const data = { session, sessionLogin, sessionLogout, isLoading, setIsLoading }
 
   return <SessionContext.Provider value={data}>{children}</SessionContext.Provider>
 }

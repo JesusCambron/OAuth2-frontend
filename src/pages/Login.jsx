@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from '../components/Button/Button'
 import SessionContext from '../context/SessionContext';
 import GoogleButton, { GOOGLE_TYPES } from '../components/GoogleButton/GoogleButton';
@@ -7,7 +7,8 @@ import { VITE_BACK_URL } from '../config';
 import { FiLock, FiMail } from "react-icons/fi";
 import axios from 'axios';
 import { decodeToken } from "react-jwt";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import LoaderPage from '../components/Loader/LoaderPage';
 
 const initialCredentials = {
   email: "",
@@ -16,7 +17,14 @@ const initialCredentials = {
 
 const Login = () => {
   const [credentials, setCredentials] = useState(initialCredentials);
-  const { handleSession } = useContext(SessionContext);
+  const { session, sessionLogin, isLoading, setIsLoading } = useContext(SessionContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (session) {
+      navigate("/home")
+    }
+  }, [session])
 
   const onChange = (e) => {
     e.preventDefault();
@@ -25,6 +33,8 @@ const Login = () => {
 
   const onClick = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     await axios.post(`${VITE_BACK_URL}/api/account/login/`, credentials)
       .then(response => {
         const decodedToken = decodeToken(response.data.data);
@@ -34,9 +44,11 @@ const Login = () => {
           email: decodedToken.email,
           token: response.data.data,
         }
-        handleSession(session);
+        sessionLogin(session);
+
       })
       .catch(err => console.log(err));
+    setIsLoading(false);
   }
 
   return (
@@ -60,7 +72,7 @@ const Login = () => {
               <a href="">Forgot your password?</a>
             </div>
             <div className="form-button-container">
-              <Button text={"Login"} styleVersion={"primary"} onClick={onClick} />
+              <Button text={"Login"} styleVersion={"primary"} onClick={e => onClick(e)} />
             </div>
           </form>
         </div>
@@ -74,6 +86,7 @@ const Login = () => {
           <Link to={"/oauth/signup"}>Sign Up</Link>
         </div>
       </Card>
+      {isLoading && <LoaderPage />}
     </>
   )
 }
