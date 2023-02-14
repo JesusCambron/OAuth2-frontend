@@ -130,6 +130,27 @@ p {
 .btn:hover {
   opacity: 0.8;
 }
+
+.text-justify {
+  text-align: justify;
+}
+
+.mt-1r {
+  margin-top: 1rem;
+}
+
+.mt-5r {
+  margin-top: 5rem;
+}
+
+.dis-block {
+  display: block;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
 /* ********** Site Styles ********** */
 
 .section > *:not(:last-child){
@@ -219,11 +240,6 @@ p {
   display: block;
   text-align: end;
   margin-top: 0.5rem;
-}
-
-.forgot-password-container > a{
-  display: block;
-  text-align: end;
 }
 
 .form-button-container {
@@ -323,3 +339,7 @@ p {
   margin-top: 2rem;
 }
 
+/* Resend Token */
+.resend-token {
+  background-color: var(--primary-detail-color);
+}
