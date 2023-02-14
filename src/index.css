@@ -109,7 +109,6 @@ p {
   text-align: center;
   min-width: 200px;
   max-width: 500px;
-  margin-top: 1.5rem;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem 2rem;
@@ -133,15 +132,18 @@ p {
 }
 /* ********** Site Styles ********** */
 
-/* Oauth Page */
-.section {
-  padding: 1.5rem 3rem;
+.section > *:not(:last-child){
+  margin-bottom: 2rem;
 }
 
-.oauth-section {
+.section {
   min-height: 100vh;
   min-width: min-content;
   padding: 1.5rem 0.6rem;
+}
+
+/* Oauth Page */
+.oauth-section {
   background-color: var(--primary-color);
 }
 
@@ -288,3 +290,36 @@ p {
 .logout-container > button{
   width: 3rem;
 }
+
+/* Verify Account */
+.verify-account {
+  display: grid;
+  align-content: center;
+  background-color: var(--primary-detail-color);
+}
+
+.blink {
+  animation-name: blink;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  
+  30% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.verify-account-login-link {
+  margin-top: 2rem;
+}
+
