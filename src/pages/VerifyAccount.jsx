@@ -13,22 +13,25 @@ const errorVerifyMessage = "Incorrect verify link";
 const VerifyAccount = () => {
   const { isLoading, setIsLoading } = useContext(SessionContext);
   const [message, setMessage] = useState(initialMessage);
-  let { id, token } = useParams();
+  const { id, token } = useParams();
 
   useEffect(() => {
-    setIsLoading(false);
+    setIsLoading(true);
     verifyAccount(id, token);
-  })
+  }, [])
 
   const verifyAccount = async (id, token) => {
     await axios.get(`${VITE_BACK_URL}/api/account/verify/${id}/${token}`,)
       .then(response => {
-        console.log(response);
         setIsLoading(false);
         setMessage(successVerifyMessage);
       })
-      .catch(err => setMessage(errorVerifyMessage));
+      .catch(err => {
+        setIsLoading(false);
+        setMessage(errorVerifyMessage)
+      });
   }
+
 
   return (
     <section className="section verify-account">
