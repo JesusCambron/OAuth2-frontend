@@ -242,6 +242,12 @@ p {
   margin-top: 0.5rem;
 }
 
+.error-container {
+  margin-top: 1rem;
+  background-color: rgba(236, 97, 97, 0.692);
+  border: thin solid red;
+}
+
 .form-button-container {
   height: 2.4rem;
   max-width: 10rem;
@@ -341,5 +347,10 @@ p {
 
 /* Resend Token */
 .resend-token {
+  background-color: var(--primary-detail-color);
+}
+
+/* Check Your Email */
+.check-your-email {
   background-color: var(--primary-detail-color);
 }

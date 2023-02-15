@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { FiLock, FiMail, FiUser, FiEye, FiEyeOff } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/Button/Button'
 import Card from '../components/Card/Card'
 import GoogleButton, { GOOGLE_TYPES } from '../components/GoogleButton/GoogleButton'
@@ -25,12 +25,16 @@ const MIN_NAME_LENGTH = 2;
 const MAX_NAME_LENGTH = 45;
 
 const Signup = () => {
+  console.log("SIGNUP");
   const [account, setAccount] = useState(initialAccount);
   const [errorsForm, setErrorsForm] = useState(initialErrorsForm);
+  const [error, setError] = useState("");
   const [lastChange, setLastChange] = useState({});
   const [isTextPassword, setIsTextPassword] = useState(false);
   const [isTextPasswordConfirm, setIsTextPasswordConfirm] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.entries(account).length) {
@@ -44,7 +48,6 @@ const Signup = () => {
     }
   }, [account])
 
-
   const onChange = (e) => {
     e.preventDefault();
     setAccount({ ...account, [e.target.id]: e.target.value });
@@ -57,15 +60,17 @@ const Signup = () => {
     validateForm(account);
     await axios.post(`${VITE_BACK_URL}/api/account/signup/`, account)
       .then(response => {
-        /* Check Your Email page */
-        console.log(response);
+        navigate("/check-your-email");
       })
       .catch(err => {
+        let message;
         if (err.response.status === 400) {
-          console.log("This email already in use")
+          message = "This email already in use";
+
         } else if (err.response.status === 500) {
-          console.log("Internal server problem")
+          message = "Internal server error";
         }
+        setError(message);
       });
     setIsLoading(false);
   }
@@ -150,6 +155,7 @@ const Signup = () => {
       <h1 className="title">Oauth Project</h1>
       <Card>
         <h2>Sign Up</h2>
+        {error !== "" && <div className="error-container">{error}</div>}
         <div className="form-container">
           <form action="POST">
             <div className="input-container">
@@ -199,7 +205,7 @@ const Signup = () => {
           <p className="or-login">OR</p>
         </div>
         <div className="oauth-login-container">
-          <GoogleButton type={GOOGLE_TYPES.signup} />
+          <GoogleButton type={GOOGLE_TYPES.signup} onError={setError} />
         </div>
         <div className="signup-container">
           <Link to={"/oauth/login"}>Sign In</Link>
