@@ -5,6 +5,7 @@ import SessionContext from '../../context/SessionContext';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { decodeToken } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
 
 const LOGIN = "login";
 const SIGNUP = "signup";
@@ -14,12 +15,12 @@ export const GOOGLE_TYPES = {
   signup: { type: SIGNUP, text: "Signup with Google", url: `${VITE_BACK_URL}/api/account/signup/google` },
 }
 
-const GoogleButton = ({ type }) => {
+const GoogleButton = ({ type, onError }) => {
   const { sessionLogin, setIsLoading } = useContext(SessionContext);
+  const navigate = useNavigate();
 
   const useGoogle = useGoogleLogin({
     onSuccess: codeResponse => {
-
       axios.post(type.url, {
         access_token: codeResponse.access_token
       }).then(response => {
@@ -34,11 +35,20 @@ const GoogleButton = ({ type }) => {
           }
           sessionLogin(session);
         } else {
-          /* Check Your Email page */
-          console.log(response);
+          setIsLoading(false);
+          navigate("/check-your-email");
         }
       })
-        .catch(err => console.log(err))
+        .catch(err => {
+          let message;
+          if (err.response.status === 400) {
+            message = "This email already in use";
+
+          } else if (err.response.status === 500) {
+            message = "Internal server error";
+          }
+          onError(message);
+        })
     },
     onError: errorResponse => console.log(errorResponse)
   });

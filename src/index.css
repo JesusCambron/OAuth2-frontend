@@ -109,7 +109,6 @@ p {
   text-align: center;
   min-width: 200px;
   max-width: 500px;
-  margin-top: 1.5rem;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem 2rem;
@@ -131,17 +130,41 @@ p {
 .btn:hover {
   opacity: 0.8;
 }
-/* ********** Site Styles ********** */
 
-/* Oauth Page */
-.section {
-  padding: 1.5rem 3rem;
+.text-justify {
+  text-align: justify;
 }
 
-.oauth-section {
+.mt-1r {
+  margin-top: 1rem;
+}
+
+.mt-5r {
+  margin-top: 5rem;
+}
+
+.dis-block {
+  display: block;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
+/* ********** Site Styles ********** */
+
+.section > *:not(:last-child){
+  margin-bottom: 2rem;
+}
+
+.section {
   min-height: 100vh;
   min-width: min-content;
   padding: 1.5rem 0.6rem;
+}
+
+/* Oauth Page */
+.oauth-section {
   background-color: var(--primary-color);
 }
 
@@ -219,9 +242,10 @@ p {
   margin-top: 0.5rem;
 }
 
-.forgot-password-container > a{
-  display: block;
-  text-align: end;
+.error-container {
+  margin-top: 1rem;
+  background-color: rgba(236, 97, 97, 0.692);
+  border: thin solid red;
 }
 
 .form-button-container {
@@ -287,4 +311,46 @@ p {
 
 .logout-container > button{
   width: 3rem;
+}
+
+/* Verify Account */
+.verify-account {
+  display: grid;
+  align-content: center;
+  background-color: var(--primary-detail-color);
+}
+
+.blink {
+  animation-name: blink;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  
+  30% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.verify-account-login-link {
+  margin-top: 2rem;
+}
+
+/* Resend Token */
+.resend-token {
+  background-color: var(--primary-detail-color);
+}
+
+/* Check Your Email */
+.check-your-email {
+  background-color: var(--primary-detail-color);
 }

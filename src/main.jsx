@@ -8,11 +8,9 @@ import './index.css'
 import { SessionProvider } from './context/SessionContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <GoogleOAuthProvider clientId={`${CLIENT_ID}`}>
-      <SessionProvider>
-        <RouterProvider router={Routes} />
-      </SessionProvider>
-    </GoogleOAuthProvider>
-  </React.StrictMode>,
+  <GoogleOAuthProvider clientId={`${CLIENT_ID}`}>
+    <SessionProvider>
+      <RouterProvider router={Routes} />
+    </SessionProvider>
+  </GoogleOAuthProvider>
 )

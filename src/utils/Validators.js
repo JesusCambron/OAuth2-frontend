@@ -3,7 +3,7 @@ const NAME_REGEX = /^([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+\s{0,1})+[a-zA-ZÑñ�
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,15}$/;
 
 export const isEmptyString = (value) => {
-  if (value.trim === value) return true;
+  if (value.trim() === "") return true;
   return false;
 }
 

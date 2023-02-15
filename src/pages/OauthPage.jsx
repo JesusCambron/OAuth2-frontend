@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 const OauthPage = () => {
   return (
-    <section className="oauth-section">
+    <section className="section oauth-section">
       <Outlet />
     </section>
   )

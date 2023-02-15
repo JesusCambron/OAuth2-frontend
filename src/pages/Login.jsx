@@ -68,8 +68,11 @@ const Login = () => {
               <input type="password" name="pw" id="pw" className="form-input" placeholder=" " value={credentials.pw} onChange={e => onChange(e)} />
               <label htmlFor="pw" className="form-label">Password</label>
             </div>
-            <div className="forgot-password-container">
+            <div className="dis-block text-align-end">
               <a href="">Forgot your password?</a>
+            </div>
+            <div className="dis-block text-align-end mt-1r">
+              <Link to={"/resend-token"}>I want you resend me my token</Link>
             </div>
             <div className="form-button-container">
               <Button text={"Login"} styleVersion={"primary"} onClick={e => onClick(e)} />
