@@ -25,7 +25,6 @@ const MIN_NAME_LENGTH = 2;
 const MAX_NAME_LENGTH = 45;
 
 const Signup = () => {
-  console.log("SIGNUP");
   const [account, setAccount] = useState(initialAccount);
   const [errorsForm, setErrorsForm] = useState(initialErrorsForm);
   const [error, setError] = useState("");

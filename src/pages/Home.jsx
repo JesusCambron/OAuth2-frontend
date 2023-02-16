@@ -14,7 +14,6 @@ const Home = () => {
     setIsLoading(false)
   })
 
-
   const logout = (e) => {
     e.preventDefault();
     sessionLogout();
@@ -23,17 +22,19 @@ const Home = () => {
 
   return (
     <section className="section home">
-      <div className="title-home-container">
-        <h1>Home</h1>
-      </div>
-      <div className="home-user-info">
-        <p>{first_name}</p>
-        <p>{last_name}</p>
-        <p>{email}</p>
-      </div>
-      <div className="btn button-container logout-container" onClick={e => logout(e)}>
-        <Button text={"Logout"} styleVersion={"custom"} />
-        <HiLogout size={22} />
+      <div className="home-container">
+        <div className="title-home-container">
+          <h1>Home</h1>
+        </div>
+        <div className="home-user-info">
+          <p>{first_name}</p>
+          <p>{last_name}</p>
+          <p>{email}</p>
+        </div>
+        <div className="btn button-container logout-container" onClick={e => logout(e)}>
+          <Button text={"Logout"} styleVersion={"custom"} />
+          <HiLogout size={22} />
+        </div>
       </div>
       {isLoading && <LoaderPage />}
     </section>

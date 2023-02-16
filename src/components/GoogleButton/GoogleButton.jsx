@@ -20,8 +20,8 @@ const GoogleButton = ({ type, onError }) => {
   const navigate = useNavigate();
 
   const useGoogle = useGoogleLogin({
-    onSuccess: codeResponse => {
-      axios.post(type.url, {
+    onSuccess: async codeResponse => {
+      await axios.post(type.url, {
         access_token: codeResponse.access_token
       }).then(response => {
         if (type.type === LOGIN) {
@@ -35,20 +35,19 @@ const GoogleButton = ({ type, onError }) => {
           }
           sessionLogin(session);
         } else {
-          setIsLoading(false);
           navigate("/check-your-email");
         }
       })
         .catch(err => {
           let message;
-          if (err.response.status === 400) {
-            message = "This email already in use";
-
-          } else if (err.response.status === 500) {
+          if (err.response.status === 500) {
             message = "Internal server error";
+          } else {
+            message = err.response.data.message;
           }
           onError(message);
         })
+      setIsLoading(false);
     },
     onError: errorResponse => console.log(errorResponse)
   });
