@@ -17,6 +17,7 @@ const initialCredentials = {
 
 const Login = () => {
   const [credentials, setCredentials] = useState(initialCredentials);
+  const [error, setError] = useState("");
   const { session, sessionLogin, isLoading, setIsLoading } = useContext(SessionContext);
   const navigate = useNavigate();
 
@@ -56,6 +57,7 @@ const Login = () => {
       <h1 className="title">Oauth Project</h1>
       <Card>
         <h2>Login</h2>
+        {error !== "" && <div className="error-container">{error}</div>}
         <div className="form-container">
           <form action="POST">
             <div className="input-container">
@@ -69,10 +71,10 @@ const Login = () => {
               <label htmlFor="pw" className="form-label">Password</label>
             </div>
             <div className="dis-block text-align-end">
-              <a href="">Forgot your password?</a>
+              <a href="">Did you forget your password?</a>
             </div>
             <div className="dis-block text-align-end mt-1r">
-              <Link to={"/resend-token"}>I want you resend me my token</Link>
+              <Link to={"/resend-token"}>Resend me my token</Link>
             </div>
             <div className="form-button-container">
               <Button text={"Login"} styleVersion={"primary"} onClick={e => onClick(e)} />
@@ -83,7 +85,7 @@ const Login = () => {
           <p className="or-login">OR</p>
         </div>
         <div className="oauth-login-container">
-          <GoogleButton type={GOOGLE_TYPES.login} />
+          <GoogleButton type={GOOGLE_TYPES.login} onError={setError} />
         </div>
         <div className="signup-container">
           <Link to={"/oauth/signup"}>Sign Up</Link>
