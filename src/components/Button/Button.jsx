@@ -16,6 +16,7 @@ const Button = (props) => {
 }
 
 Button.defaultProps = {
+  text: "Button",
   styleVersion: "primary",
   type: "button",
   isDisabled: false,

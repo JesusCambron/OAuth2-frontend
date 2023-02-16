@@ -26,6 +26,15 @@ body {
   color: var(--text-color);
 }
 
+#root {
+  min-width: 280px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary-detail-color);
+}
+
 a:hover {
   opacity: 0.75;
 }
@@ -71,6 +80,41 @@ p {
 }
 
 /* ********** Components ********** */
+
+/* Google Button */
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 2.5rem;
+  max-width: 250px;
+  border-radius: 30px;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 0px 0.5px 2px 0.5px rgba(0,0,0,0.51);
+}
+
+/* Card */
+.card {
+  background-color: white;
+  text-align: center;
+  min-width: 200px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding: 2rem 4rem;
+  }
+}
+
+/* ********** Utilities ********** */
 .btn {
   cursor: pointer;
   transition: opacity 0.2s ease-in;
@@ -79,5 +123,235 @@ p {
 .btn:hover {
   opacity: 0.8;
 }
-/* ********** Utilities ********** */
+
+.text-justify {
+  text-align: justify;
+}
+
+.mt-1r {
+  margin-top: 1rem;
+}
+
+.mt-5r {
+  margin-top: 5rem;
+}
+
+.dis-block {
+  display: block;
+}
+
+.text-align-end {
+  text-align: end;
+}
+
 /* ********** Site Styles ********** */
+
+.section > *:not(:last-child){
+  margin-bottom: 2rem;
+}
+
+.section {
+  min-height: 100vh;
+  min-width: min-content;
+  padding: 1.5rem 0.6rem;
+}
+
+/* Oauth Page */
+.oauth-section {
+  background-color: var(--primary-color);
+}
+
+.title {
+  text-align: center;
+}
+
+.form-container {
+  margin-top: 1.5rem;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.icon-input {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}
+
+.pw-eye {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+
+.form-input {
+  height: 2.8rem;
+  width: 100%;
+  border: none;
+  padding: 10px 10px 0 40px;
+  border-bottom: thin solid var(--primary-detail-color);
+}
+
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover, 
+.form-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 40rem #fff inset;
+}
+
+.form-label {
+  background-color: white;
+  cursor: pointer;
+  position: absolute;
+  left: 40px;
+  transform: translateY(18px);
+  transition: transform 0.5s, color 0.3s;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  transform: translateY(-10px) translateX(-30px) scale(0.9);;
+  transform-origin: top left;
+}
+
+.form-input:focus-visible {
+  outline-color: var(--text-color);
+}
+
+.input-error + label {
+  color: red;
+}
+
+.input-error {
+  border: thin solid red;
+}
+
+.error-msg {
+  color: red;
+  display: block;
+  text-align: end;
+  margin-top: 0.5rem;
+}
+
+.error-container {
+  margin-top: 1rem;
+  background-color: rgba(236, 97, 97, 0.692);
+  border: thin solid red;
+}
+
+.form-button-container {
+  height: 2.4rem;
+  max-width: 10rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.or-container {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  color: gray;
+  margin-top: 1rem;
+}
+
+.or-container:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  min-width: 80%;
+  left: 10%;
+  border-bottom: 1px solid gray;
+}
+
+.or-login {
+  display: inline;
+  position: relative;
+  background-color: white;
+}
+
+.oauth-login-container {
+  margin-top: 1rem;
+}
+
+.signup-container{
+  margin-top: 5rem;
+}
+
+.signup-container > a{
+  display: block;
+  text-align: center;
+}
+
+/* Home */
+.home {
+  min-height: 100vh;
+  color: white;
+  padding: 2.5rem 2rem;
+  background-color: var(--secondary-color);
+}
+
+.home-container {
+  min-width: 200px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.home-user-info {
+  margin-top: 2rem;
+  padding-left: 1rem;
+}
+
+.logout-container {
+  height: 2rem;
+  max-width: 8rem;
+  margin: 2rem auto;
+  background-color: var(--text-color);
+}
+
+.logout-container > button{
+  width: 3rem;
+}
+
+/* Verify Account */
+.verify-account {
+  display: grid;
+  align-content: center;
+  background-color: var(--primary-detail-color);
+}
+
+.blink {
+  animation-name: blink;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  
+  30% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.verify-account-login-link {
+  margin-top: 2rem;
+}
+
+/* Resend Token */
+.resend-token {
+  background-color: var(--primary-detail-color);
+}
+
+/* Check Your Email */
+.check-your-email {
+  background-color: var(--primary-detail-color);
+}
