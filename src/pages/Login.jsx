@@ -35,7 +35,6 @@ const Login = () => {
   const onClick = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     await axios.post(`${VITE_BACK_URL}/api/account/login/`, credentials)
       .then(response => {
         const decodedToken = decodeToken(response.data.data);
@@ -46,9 +45,16 @@ const Login = () => {
           token: response.data.data,
         }
         sessionLogin(session);
-
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        let message;
+        if (err.response.status === 500) {
+          message = "Internal server error";
+        } else {
+          message = err.response.data.message;
+        }
+        setError(message);
+      });
     setIsLoading(false);
   }
 
